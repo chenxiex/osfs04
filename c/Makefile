@@ -8,11 +8,11 @@ BOOT_BIN:=$(subst .asm,.bin,$(BOOT))
 LDR_BIN:=$(subst .asm,.bin,$(LDR))
 
 IMG:=a.img
-FLOPPY:=/mnt/floppy/
+FLOPPY:=/mnt
 
-.PHONY : everything
+.PHONY : everything, run, init
 
-everything : $(BOOT_BIN) $(LDR_BIN)
+everything : $(BOOT_BIN) $(LDR_BIN) init
 	dd if=$(BOOT_BIN) of=$(IMG) bs=512 count=1 conv=notrunc
 	sudo mount -o loop $(IMG) $(FLOPPY)
 	sudo cp $(LDR_BIN) $(FLOPPY) -v
@@ -27,3 +27,8 @@ $(BOOT_BIN) : $(BOOT)
 $(LDR_BIN) : $(LDR)
 	nasm $< -o $@
 
+run : everything
+	qemu-system-i386 -fda $(IMG)
+
+init : 
+	gzip -cd $(IMG).gz > $(IMG)

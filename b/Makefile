@@ -11,9 +11,9 @@ LDR_BIN:=$(subst .asm,.bin,$(LDR))
 
 everything : $(BOOT_BIN) $(LDR_BIN)
 	dd if=$(BOOT_BIN) of=a.img bs=512 count=1 conv=notrunc
-	sudo mount -o loop a.img /mnt/floppy/
-	sudo cp $(LDR_BIN) /mnt/floppy/ -v
-	sudo umount /mnt/floppy/
+	sudo mount -o loop a.img /mnt
+	sudo cp $(LDR_BIN) /mnt -v
+	sudo umount /mnt
 
 clean :
 	rm -f $(BOOT_BIN) $(LDR_BIN)
