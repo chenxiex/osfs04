@@ -14,5 +14,5 @@ The booting process will be:
 
 `‹prev`_   `next›`_
 
-.. _`‹prev`: https://github.com/yyu/osfs03
-.. _`next›`: https://github.com/yyu/osfs05
+.. _`‹prev`: https://github.com/chenxiex/osfs03
+.. _`next›`: https://github.com/chenxiex/osfs05
